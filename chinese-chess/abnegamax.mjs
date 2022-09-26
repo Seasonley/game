@@ -1,5 +1,5 @@
 const MINN = -(1 << 28);
-const MAXDEEP = 4;
+const MAXDEEP = 2;
 function abnegamax(node, a, b, deep) {
     if (deep >= MAXDEEP) return node;
     let bestV = { mark: MINN };
