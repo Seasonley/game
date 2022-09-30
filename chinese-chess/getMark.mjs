@@ -25,19 +25,16 @@ function getMark(chess) {
 
 function position(chess) {// 棋子位置
     let ci = 1;
+    let cj = chessHalfLen;
     let ans = 0;
     while (ci < chessHalfLen) {
         const p = chess[ci];
+        const q = chess[cj];
         if (p)
             ans += PIECE_VALUE[B_C[ci]][SQUARE_FLIP - p];
-        ci++
-    }
-    let cj = chessHalfLen;
-    while (cj < chessLen) {
-        const p = chess[cj];
-        if (p)
+        if (q)
             ans -= PIECE_VALUE[-B_C[cj]][p];
-        cj++
+        ci++, cj++;
     }
     return ans;
 }

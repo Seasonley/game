@@ -37,9 +37,10 @@ const moveGenerate = {
             }
         }
     },
-    [B_F2C.n](idx, board, q, res) {//马
+    [B_F2C.n](idx, board, q, res, isEnd) {//马
+        const akDelta = isEnd ? aDelta : kDelta;
         for (let i = 0; i < nArrLen; i++) {
-            if (board[idx + kDelta[i]] === 0) {
+            if (board[idx + akDelta[i]] === 0) {
                 const a = idx + nDelta[i * 2];
                 const b = idx + nDelta[i * 2 + 1];
                 q * board[a] >= 0 && res.push([idx, a]);

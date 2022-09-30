@@ -8,13 +8,14 @@ function isEnd(board, chess, q) {
 (3) 假设帅(将)是马，判断它是否能吃到对方的马，需要注意的是，帅(将)的马腿用的数组是 ccAdvisorDelta，而不是 ccKingDelta；
 (4) 假设帅(将)是过河的兵(卒)，判断它是否能吃到对方的卒(兵)
   */
-  let cIdx = chess[q === 1 ? 15 : 31];
+  let kid = chess[q === 1 ? 15 : 31];
+  let KID = chess[q === -1 ? 15 : 31];
   const res = [];
-  const endArr = [B_F2C.r, B_F2C.C, B_F2C.N, B_F2C.p];
+  const endArr = [B_F2C.r, B_F2C.c, B_F2C.n, B_F2C.p];
   for (let i = 0; i < endArr.length; i++) {
     const t = endArr[i];
-    moveGenerate[t](cIdx, board, q, res);
-    if (res.some((v) => board[v[1]] === q * t)) {
+    moveGenerate[t](kid, board, q, res, true);
+    if (res.some((v) => board[v[1]] === q * t || board[v[1]] === KID)) {
       return true;
     }
   }
