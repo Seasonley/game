@@ -1,14 +1,14 @@
 const MINN = -(1 << 28);
 const MAXDEEP = 4;
 function abnegamax(node, a, b, deep) {
-    if (deep >= MAXDEEP) return node;
-    let bestV = { mark: MINN };
+    if (deep >= MAXDEEP || node.isEnd) return node;
+    let bestV = { score: MINN };
     for (let child of node.children()) {
-        const val = abnegamax(child, -b, -Math.max(a, bestV.mark), deep + 1);
-        val.mark = -val.mark
-        if (val.mark > bestV.mark) {
+        const val = abnegamax(child, -b, -Math.max(a, bestV.score), deep + 1);
+        val.score = -val.score
+        if (val.score > bestV.score) {
             bestV = val;
-            if (bestV.mark >= b) break;
+            if (bestV.score >= b) break;
         }
     }
 

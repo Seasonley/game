@@ -37,8 +37,8 @@ const moveGenerate = {
             }
         }
     },
-    [B_F2C.n](idx, board, q, res, isEnd) {//马
-        const akDelta = isEnd ? aDelta : kDelta;
+    [B_F2C.n](idx, board, q, res, isMate) {//马
+        const akDelta = isMate ? aDelta : kDelta;
         for (let i = 0; i < nArrLen; i++) {
             if (board[idx + akDelta[i]] === 0) {
                 const a = idx + nDelta[i * 2];

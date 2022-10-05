@@ -1,9 +1,5 @@
 import { isEnd } from "./isEnd.mjs";
-// import { minimax } from "./minimax.mjs";
-// import { abminimax } from "./abminimax.mjs";
 import { abnegamax } from "./abnegamax.mjs";
-// import { abminnegamax } from "./abminnegamax.mjs";
-// import { negamax } from "./negamax.mjs";
 import * as readline from "readline";
 import { drawBoard } from "./drawBoard.mjs";
 import { Nod } from "./Nod.mjs";
@@ -20,7 +16,7 @@ process.stdin.on('keypress', (str, key) => {
         const idx = (cursor.y << 4) + cursor.x;
         chessBoard[idx] = 2
         drawBoard(chessBoard.join(''))
-        if (isEnd(cursor.x, cursor.y, chessBoard.join(''))) {
+        if (isEnd(cursor.x, cursor.y, chessBoard.join(''), true)) {
             process.exit(0)
         }
         let x = abnegamax(new Nod(
@@ -31,11 +27,13 @@ process.stdin.on('keypress', (str, key) => {
         if (!x.pos) {
             process.exit(0)
         }
-        const p = x.pos[x.pos.length - 4];
+        const p = x.pos[1];
         chessBoard[p] = 1;
+        cursor.x = p % 16;
+        cursor.y = (p - cursor.x) / 16;
         drawBoard(chessBoard.join(''), cursor)
 
-        if (isEnd(p % 16, (p - p % 16) / 16, chessBoard.join(''))) {
+        if (isEnd(p % 16, (p - p % 16) / 16, chessBoard.join(''), true)) {
             process.exit(0)
         }
     } else {
